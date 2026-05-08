@@ -1,26 +1,595 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* INNERA visual system · Awwwards-style: cinematic dark, spectral accents, depth */
+  --bg: #04050a;
+  --bg-elevated: rgba(255, 255, 255, 0.04);
+  --surface: rgba(255, 255, 255, 0.058);
+  --surface-strong: rgba(255, 255, 255, 0.09);
+  --text: #f8f5f8;
+  --muted: rgba(248, 245, 248, 0.7);
+  --subtle: rgba(248, 245, 248, 0.45);
+
+  --accent: #f4c8dc;
+  --accent-soft: rgba(244, 200, 220, 0.2);
+  --accent-glow: rgba(244, 200, 220, 0.32);
+
+  --spectral: #b48cff;
+  --spectral-soft: rgba(180, 140, 255, 0.18);
+
+  --warm: #f0d4ba;
+  --warm-soft: rgba(240, 212, 186, 0.16);
+  --danger-soft: rgba(255, 110, 160, 0.16);
+
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.11);
+
+  --shadow-soft: 0 36px 100px rgba(0, 0, 0, 0.62);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 24px 72px rgba(0, 0, 0, 0.48);
+
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+
+  --hairline: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  --hairline-spectral: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(244, 200, 220, 0.55) 35%,
+    rgba(180, 140, 255, 0.55) 65%,
+    transparent 100%
+  );
+  --glow-line: var(--hairline-spectral);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-sans);
+
+  --space-section: clamp(5rem, 11vw, 8.5rem);
+
+  --glow-rose: 0 0 120px rgba(244, 200, 220, 0.22);
+  --glow-violet: 0 0 160px rgba(170, 110, 255, 0.2);
+  --glow-cherry: 0 0 130px rgba(255, 120, 175, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes innera-mesh-drift {
+  0% {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(1.5%, 1.2%, 0) scale(1.03);
   }
 }
 
+/* Subtle film grain: premium depth, very low contrast */
+.innera-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Calm glass surfaces: depth from light, not rainbow glow */
+.innera-surface-card,
+.innera-glass-premium {
+  position: relative;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px) saturate(1.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.06);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 20px 56px rgba(0, 0, 0, 0.32);
+  transition:
+    border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.innera-surface-card:hover,
+.innera-glass-premium:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 30px 80px rgba(0, 0, 0, 0.42),
+    var(--glow-rose);
+  transform: translateY(-1px);
+}
+
+.innera-surface-card--featured,
+.innera-glass-premium--featured {
+  border-color: rgba(244, 200, 220, 0.28);
+  background: rgba(244, 200, 220, 0.085);
+}
+
+.innera-surface-card--featured:hover,
+.innera-glass-premium--featured:hover {
+  border-color: rgba(244, 200, 220, 0.42);
+}
+
+.innera-price-anchor-line {
+  text-decoration: line-through;
+  text-decoration-color: rgba(154, 150, 144, 0.6);
+  opacity: 0.65;
+}
+
+.innera-section-bleed {
+  position: relative;
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+.innera-parallax-slow {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .innera-surface-card,
+  .innera-glass-premium,
+  .innera-surface-card:hover,
+  .innera-glass-premium:hover,
+  .innera-panel,
+  .innera-panel:hover,
+  .innera-card,
+  .innera-card:hover,
+  .innera-bg-mesh {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Slow mesh layer behind UI: global atmosphere */
+.innera-bg-mesh {
+  animation: innera-mesh-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.innera-hero-bloom {
+  background: radial-gradient(ellipse 70% 55% at 85% 15%, rgba(244, 200, 220, 0.14), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 10% 90%, rgba(160, 100, 255, 0.1), transparent 55%);
+}
+
+/* Unified “bento” surface: glass + spectral edge read */
+.innera-panel {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(120, 70, 180, 0.05) 100%
+  );
+  backdrop-filter: blur(22px) saturate(1.18);
+  -webkit-backdrop-filter: blur(22px) saturate(1.18);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 16px 48px rgba(0, 0, 0, 0.32);
+  transition:
+    border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.innera-panel:hover {
+  border-color: rgba(244, 200, 220, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.09) inset,
+    0 22px 56px rgba(0, 0, 0, 0.4),
+    var(--glow-violet);
+  transform: translateY(-2px);
+}
+
+.innera-panel--quiet:hover {
+  transform: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 16px 48px rgba(0, 0, 0, 0.32);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.innera-panel--xl {
+  border-radius: var(--radius-xl);
+}
+
+.innera-hairline-spectral {
+  height: 1px;
+  width: 100%;
+  background: var(--hairline-spectral);
+  opacity: 0.85;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.innera-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.innera-container {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+}
+
+.innera-page-head {
+  padding-bottom: 2.5rem;
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.innera-title-page {
+  font-size: clamp(1.85rem, 3.8vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.innera-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.innera-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+/* Home / hero: optical sizing + even line breaks */
+.innera-display--hero {
+  font-weight: 600;
+  letter-spacing: -0.042em;
+  line-height: 1.02;
+}
+
+.innera-hero-heading {
+  text-wrap: balance;
+}
+
+.innera-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+.innera-gradient-text {
+  background: linear-gradient(
+    122deg,
+    #ffffff 8%,
+    #fce8f2 28%,
+    #f4c8dc 48%,
+    #d4c2ff 68%,
+    #a78bfa 88%,
+    #8f6dff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.innera-gradient-text--subtle {
+  background: linear-gradient(120deg, rgba(248, 245, 248, 0.96) 0%, rgba(244, 200, 220, 0.95) 45%, rgba(200, 170, 255, 0.92) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.innera-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(4, 5, 10, 0.62);
+  backdrop-filter: blur(22px) saturate(1.22);
+  -webkit-backdrop-filter: blur(22px) saturate(1.22);
+}
+
+.innera-topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hairline-spectral);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.innera-topbar--minimal {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(4, 5, 10, 0.55);
+}
+
+.innera-nav-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 8px 14px;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.innera-nav-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(244, 200, 220, 0.35);
+  box-shadow: 0 0 28px rgba(160, 100, 255, 0.12);
+}
+
+.innera-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.innera-btn:active {
+  transform: scale(0.98);
+}
+
+.innera-btn-primary {
+  background: linear-gradient(165deg, rgba(244, 200, 220, 0.98), rgba(180, 110, 255, 0.88));
+  color: #0b060a;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14) inset,
+    0 18px 46px rgba(180, 110, 255, 0.18),
+    var(--glow-rose);
+}
+
+.innera-btn-primary:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 22px 56px rgba(180, 110, 255, 0.22),
+    var(--glow-rose);
+  transform: translateY(-1px);
+}
+
+.innera-btn-secondary {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  border-color: rgba(255, 255, 255, 0.13);
+  color: var(--text);
+}
+
+.innera-btn-secondary:hover {
+  border-color: rgba(244, 200, 220, 0.35);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(180, 140, 255, 0.06));
+  box-shadow: 0 0 40px rgba(160, 100, 255, 0.12);
+}
+
+.innera-btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.innera-btn-ghost:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.innera-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(26px) saturate(1.25);
+  -webkit-backdrop-filter: blur(26px) saturate(1.25);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.35s ease;
+}
+
+.innera-card:hover {
+  border-color: rgba(244, 200, 220, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 28px 64px rgba(0, 0, 0, 0.5),
+    var(--glow-rose);
+  transform: translateY(-2px);
+}
+
+.innera-card-elevated {
+  background: linear-gradient(
+    148deg,
+    rgba(26, 12, 32, 0.88) 0%,
+    rgba(8, 10, 20, 0.78) 48%,
+    rgba(140, 80, 200, 0.14) 100%
+  );
+}
+
+.innera-input {
+  width: 100%;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.innera-input:focus {
+  border-color: rgba(244, 200, 220, 0.65);
+  box-shadow:
+    0 0 0 3px rgba(244, 200, 220, 0.22),
+    var(--glow-rose);
+}
+
+.innera-kpi-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.innera-kpi-value {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.innera-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.innera-pill--spectral {
+  border-color: rgba(244, 200, 220, 0.25);
+  background: linear-gradient(135deg, rgba(244, 200, 220, 0.12), rgba(160, 100, 255, 0.1));
+  color: rgba(248, 245, 248, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 32px rgba(160, 100, 255, 0.15);
+}
+
+.innera-blur-locked {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  isolation: isolate;
+}
+
+.innera-blur-locked::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  backdrop-filter: blur(14px);
+  background: rgba(12, 13, 15, 0.5);
+  pointer-events: none;
+}
+
+.innera-pattern-cell {
+  min-height: 64px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--surface);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.innera-pattern-empty {
+  opacity: 0.28;
+}
+
+.innera-pattern-low {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.innera-pattern-mid {
+  border-color: rgba(244, 200, 220, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(244, 200, 220, 0.12);
+}
+
+.innera-pattern-high {
+  border-color: rgba(244, 200, 220, 0.6);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 200, 220, 0.2),
+    0 10px 28px var(--warm-soft);
+}
+
+.innera-scroll-story {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 900px) {
+  .innera-dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .innera-topbar,
+  .innera-btn,
+  .innera-floating-book {
+    display: none !important;
+  }
+
+  .innera-card {
+    box-shadow: none;
+    border-color: #ddd;
+    background: #fff;
+  }
 }
