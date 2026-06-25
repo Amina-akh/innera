@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Методичка · Психология отношений</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    :root {
+      --rose: #c8587a;
+      --rose-soft: #fdf0f4;
+      --rose-line: #f0d4de;
+      --sage: #4a8f6e;
+      --sage-soft: #edf6f1;
+    }
+
+    .hero--relations {
+      background: linear-gradient(145deg, #2a1a24 0%, #3d2435 45%, #2e3548 100%);
+    }
+    .hero--relations .eyebrow { color: #e8b4c8; }
+    .hero--relations .lead { color: #c8b8c4; }
+
+    .toc {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 28px 0 36px;
+    }
+    .toc a {
+      display: block;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.4;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .toc a:hover {
+      border-color: var(--rose);
+      box-shadow: 0 2px 12px rgba(200, 88, 122, 0.1);
+    }
+    .toc a span {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 4px;
+    }
+
+    .intro-letter {
+      background: var(--rose-soft);
+      border: 1px solid var(--rose-line);
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin: 28px 0;
+      position: relative;
+    }
+    .intro-letter::before {
+      content: "«";
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--rose);
+      opacity: 0.25;
+      position: absolute;
+      top: 8px;
+      left: 16px;
+    }
+    .intro-letter p { padding-left: 28px; }
+    .intro-letter .sign {
+      margin-top: 16px;
+      padding-left: 28px;
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .insight {
+      border-left: 4px solid var(--rose);
+      background: var(--rose-soft);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .insight strong { color: var(--rose); }
+
+    .attach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .attach-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .attach-card h4 {
+      margin: 0 0 8px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--rose);
+    }
+    .attach-card p { font-size: 13px; margin: 0 0 8px; }
+    .attach-card .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f5f2f8;
+      color: var(--mag);
+    }
+
+    .cycle-diagram {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .cycle-diagram .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .cycle-diagram .step {
+      background: var(--rose-soft);
+      color: #8a3d58;
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+    .cycle-diagram .arrow { color: var(--muted); font-size: 18px; }
+    .cycle-diagram .break {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+      font-size: 13px;
+      color: var(--sage);
+      font-weight: 600;
+    }
+
+    .flags {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .flag-box {
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 13px;
+    }
+    .flag-box.red { background: #fdf2f2; border: 1px solid #f0d0d0; }
+    .flag-box.green { background: var(--sage-soft); border: 1px solid #c8e4d4; }
+    .flag-box h4 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .flag-box.red h4 { color: #b84a4a; }
+    .flag-box.green h4 { color: var(--sage); }
+    .flag-box ul { margin: 0; padding-left: 18px; }
+    .flag-box li { margin-bottom: 6px; }
+
+    .formula {
+      background: var(--text);
+      color: #f0ecf4;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .formula em { color: #e8b4c8; font-style: normal; font-weight: 600; }
+
+    .checklist { list-style: none; padding: 0; margin: 16px 0; }
+    .checklist li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .checklist li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--rose-line);
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .week-plan {
+      counter-reset: week;
+    }
+    .week-plan .exercise .day::before {
+      content: "";
+    }
+
+    h2 { border-bottom-color: var(--rose); }
+
+    @media (max-width: 600px) {
+      .toc, .attach-grid, .flags { grid-template-columns: 1fr; }
+      .cycle-diagram .steps { flex-direction: column; }
+      .cycle-diagram .arrow { transform: rotate(90deg); }
+    }
+
+    @media print {
+      .hero--relations {
+        background: #fff;
+        color: #000;
+      }
+      .hero--relations .eyebrow,
+      .hero--relations .lead { color: #444; }
+      .formula { background: #f5f2f8; color: #000; }
+      .formula em { color: var(--rose); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav-top">
+      <a href="/products">← Каталог</a>
+      <a href="#s1">Привязанность</a>
+      <a href="#s4">Конфликты</a>
+      <a href="#s7">Упражнения</a>
+    </nav>
+
+    <header class="hero hero--relations">
+      <div class="eyebrow">INNERA · методичка для самостоятельной работы</div>
+      <h1 class="display">Психология близких отношений</h1>
+      <p class="lead">Как понимать свои паттерны, говорить о важном и строить контакт — без идеализации и без самообвинения. От практикующего психолога, для тех, кто готов смотреть честно.</p>
+    </header>
+
+    <nav class="toc" aria-label="Содержание">
+      <a href="#intro"><span>00</span>Введение</a>
+      <a href="#s1"><span>01</span>Тип привязанности</a>
+      <a href="#s2"><span>02</span>Циклы и триггеры</a>
+      <a href="#s3"><span>03</span>Границы и потребности</a>
+      <a href="#s4"><span>04</span>Конфликты</a>
+      <a href="#s5"><span>05</span>Близость и дистанция</a>
+      <a href="#s6"><span>06</span>Красные и зелёные флаги</a>
+      <a href="#s7"><span>07</span>Упражнения · 7 дней</a>
+      <a href="#s8"><span>08</span>Когда к специалисту</a>
+    </nav>
+
+    <section id="intro">
+      <div class="intro-letter">
+        <p>Отношения — это не лотерея и не «химия навсегда». Это навык, который мы учимся применять: смотреть на себя, слышать другого, выдерживать разницу. Большинство пар приходят ко мне не потому, что «не любят друг друга», а потому что застряли в одних и тех же сценариях — и не знают, как из них выйти.</p>
+        <p>Эта методичка — не про то, как «удержать» партнёра или стать идеальным. Она про то, как понять, <em>что с вами происходит в близости</em>, и начать менять то, что в вашей власти. Читайте по разделам, делайте упражнения в конце — по одному в день. Записывайте ответы: на бумаге работает глубже, чем «просто подумала».</p>
+        <p class="sign">— С теплом и уважением к вашему пути,<br>практикующий психолог, INNERA</p>
+      </div>
+
+      <div class="note">
+        <strong>Как пользоваться</strong>
+        Выделите 20–30 минут в день. Не пытайтесь «пройти всё за вечер» — мозгу нужно время интегрировать. Если вы в остром кризисе, насилии или при мыслях о самоповреждении — сначала безопасность и помощь специалиста, потом эта тетрадь.
+      </div>
+    </section>
+
+    <h2 id="s1">1 · Откуда берётся наш стиль близости</h2>
+    <p>Теория привязанности (Боулби, Эйнсворт, позже — Микулинцер и Шавер) объясняет простую вещь: в детстве мы учимся, <strong>можно ли надеяться на близкого человека</strong>. Этот опыт не приговор — он карта. Её можно перечитывать и прокладывать новые маршруты.</p>
+
+    <div class="attach-grid">
+      <div class="attach-card">
+        <h4>Надёжная привязанность</h4>
+        <p>Комфорт и в близости, и на расстоянии. Потребности озвучиваются. Конфликт не равен разрыву.</p>
+        <span class="tag">≈ 50–60% взрослых</span>
+      </div>
+      <div class="attach-card">
+        <h4>Тревожная привязанность</h4>
+        <p>Страх отвержения, гиперчувствительность к дистанции. «Любят ли меня?», проверки, слияние.</p>
+        <span class="tag">Часто тянет к избегающим</span>
+      </div>
+      <div class="attach-card">
+        <h4>Избегающая привязанность</h4>
+        <p>Дискомфорт от слишком близкого контакта. Уход в работу, молчание, «мне нормально одному».</p>
+        <span class="tag">Близость = потеря себя</span>
+      </div>
+      <div class="attach-card">
+        <h4>Дезорганизованная</h4>
+        <p>Хочу близости — боюсь близости. Резкие переключения, сложно доверять и предсказывать.</p>
+        <span class="tag">Часто после травматичного опыта</span>
+      </div>
+    </div>
+
+    <div class="insight">
+      <strong>Важно:</strong> тип привязанности — не ярлык и не оправдание поведения. Это язык, на котором можно описать свои автоматические реакции и начать выбирать иначе.
+    </div>
+
+    <h3>Быстрая самодиагностика</h3>
+    <p>Ответьте честно: что вы делаете первым, когда чувствуете, что партнёр «отдалился»?</p>
+    <table>
+      <thead>
+        <tr><th>Реакция</th><th>Возможный паттерн</th><th>Что попробовать</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Начинаю писать, звонить, выяснять</td>
+          <td>Тревожный полюс</td>
+          <td>Пауза 2 часа → назвать чувство, не обвинение</td>
+        </tr>
+        <tr>
+          <td>Закрываюсь, ухожу в дела, молчу</td>
+          <td>Избегающий полюс</td>
+          <td>Одна фраза: «Мне нужно время, я вернусь к разговору»</td>
+        </tr>
+        <tr>
+          <td>Обесцениваю: «Мне всё равно»</td>
+          <td>Защита через отстранение</td>
+          <td>Записать, чего на самом деле боюсь потерять</td>
+        </tr>
+        <tr>
+          <td>Взрываюсь или обвиняю</td>
+          <td>Дезорганизация / накопленная обида</td>
+          <td>Стоп-слово + возврат к разговору через согласованное время</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="s2">2 · Циклы, в которых мы застреваем</h2>
+    <p>В терапии пар мы часто видим один и тот же танец: один тянется ближе — второй отступает. Первый тревожится и давит — второй закрывается ещё сильнее. Оба чувствуют себя неуслышанными.</p>
+
+    <div class="cycle-diagram">
+      <p style="margin:0 0 16px; font-size:13px; color:var(--muted);">Классический цикл «преследователь — отстраняющийся»</p>
+      <div class="steps">
+        <span class="step">Один чувствует дистанцию</span>
+        <span class="arrow">→</span>
+        <span class="step">Тревога / обида</span>
+        <span class="arrow">→</span>
+        <span class="step">Давление: вопросы, претензии</span>
+        <span class="arrow">→</span>
+        <span class="step">Второй закрывается</span>
+        <span class="arrow">→</span>
+        <span class="step">Ещё больше дистанции</span>
+      </div>
+      <p class="break">↓ Точка выхода: назвать цикл вслух · договориться о паузе · вернуться к разговору в конкретное время</p>
+    </div>
+
+    <h3>Триггеры — не «мелочи»</h3>
+    <p>Триггер — это не повод для ссоры, а сигнал старой раны. Неубранные носки могут быть не про носки, а про «меня не уважают». Опоздание на 10 минут — не про время, а про «на меня не рассчитывают».</p>
+    <ol class="steps">
+      <li><strong>Заметьте тело:</strong> где сжимается — горло, грудь, живот?</li>
+      <li><strong>Назовите чувство:</strong> обида, страх, стыд, злость?</li>
+      <li><strong>Спросите себя:</strong> когда я уже чувствовал(а) это — до этого партнёра?</li>
+      <li><strong>Отделите прошлое от настоящего:</strong> что из ситуации — факт, а что — моя интерпретация?</li>
+    </ol>
+
+    <h2 id="s3">3 · Границы и потребности</h2>
+    <p>Граница — это не стена и не наказание. Это информация: «Так со мной можно, а так — нет». Здоровые границы делают близость безопаснее, а не холоднее.</p>
+
+    <h3>Три уровня границ</h3>
+    <table>
+      <thead>
+        <tr><th>Уровень</th><th>Пример</th><th>Как звучит</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Физический</strong></td>
+          <td>Личное пространство, сон, секс, касания</td>
+          <td>«Мне нужно побыть одному вечером в неделю»</td>
+        </tr>
+        <tr>
+          <td><strong>Эмоциональный</strong></td>
+          <td>Темы, о которых не готов(а) говорить; объём поддержки</td>
+          <td>«Сейчас не могу это обсуждать — вернусь завтра»</td>
+        </tr>
+        <tr>
+          <td><strong>Временной</strong></td>
+          <td>Работа, друзья, семья, время на себя</td>
+          <td>«В воскресенье у меня планы, давай согласуем заранее»</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="formula">
+      <strong>Формула «я-сообщения»</strong> (Гордон, адаптация для пар):<br><br>
+      <em>Когда</em> [конкретный факт, без оценок] · <em>я чувствую</em> [эмоция] · <em>потому что</em> [потребность / ценность] · <em>мне важно</em> [просьба, а не ультиматум]<br><br>
+      Пример: «Когда мы договариваемся о времени и планы меняются в последний момент, я чувствую тревогу, потому что для меня важна предсказуемость. Мне важно заранее предупреждать, если что-то изменилось».
+    </div>
+
+    <div class="insight">
+      <strong>Частая ошибка:</strong> путать границу с контролем. «Не общайся с бывшими» — контроль. «Мне некомфортно, когда вы переписываетесь ночью в нашей спальне — давай обсудим» — граница + диалог.
+    </div>
+
+    <h2 id="s4">4 · Конфликты: не враг, а сигнал</h2>
+    <p>Исследования Джона Готтмана показывают: дело не в том, <em>ссятся</em> ли пары, а в том, <em>как</em> они ссорятся и восстанавливаются после. Четыре «всадника апокалипсиса» — паттерны, которые разрушают отношения:</p>
+
+    <table>
+      <thead>
+        <tr><th>Паттерн</th><th>Как звучит</th><th>Антидот</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Критика</strong></td>
+          <td>«Ты всегда…», «Ты никогда…»</td>
+          <td>Жалоба на конкретное поведение + я-сообщение</td>
+        </tr>
+        <tr>
+          <td><strong>Презрение</strong></td>
+          <td>Насмешка, сарказм, закатывание глаз</td>
+          <td>Пауза. Вернуть уважение. Не продолжать в этом тоне</td>
+        </tr>
+        <tr>
+          <td><strong>Защита</strong></td>
+          <td>«Это не я, это ты!», оправдания</td>
+          <td>«Ты прав(а) в части…», принять долю ответственности</td>
+        </tr>
+        <tr>
+          <td><strong>Стена</strong></td>
+          <td>Молчание, уход, «мне всё равно»</td>
+          <td>Договорённость: «Мне нужно 30 минут — я вернусь»</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Алгоритм восстановления после ссоры</h3>
+    <ol class="steps">
+      <li><strong>Остывание</strong> — 20–40 минут без продолжения боя (но с обещанием вернуться).</li>
+      <li><strong>Короткое признание</strong> — «Мне жаль, что мы так поговорили» (не равно «я виноват(а) во всём»).</li>
+      <li><strong>Каждый говорит свою версию</strong> — без перебивания, по 3–5 минут.</li>
+      <li><strong>Найдите общее</strong> — «Мы оба хотели…», «Нам обоим важно…»</li>
+      <li><strong>Один конкретный шаг</strong> — не «больше так не будем», а «в следующий раз сделаем так…»</li>
+    </ol>
+
+    <h2 id="s5">5 · Близость — не только про тело</h2>
+    <p>Интимность строится на слоях. Когда пропадает один — часто «съедается» и остальное.</p>
+
+    <table>
+      <thead>
+        <tr><th>Слой</th><th>Что это</th><th>Вопрос для пары</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Бытовой</strong></td>
+          <td>Распределение дел, деньги, расписание</td>
+          <td>Чувствуем ли мы себя командой?</td>
+        </tr>
+        <tr>
+          <td><strong>Эмоциональный</strong></td>
+          <td>Делиться чувствами, быть услышанным</td>
+          <td>Знает ли партнёр, что у меня на душе?</td>
+        </tr>
+        <tr>
+          <td><strong>Интеллектуальный</strong></td>
+          <td>Общие темы, любопытство друг к другу</td>
+          <td>Интересно ли нам разговаривать?</td>
+        </tr>
+        <tr>
+          <td><strong>Физический</strong></td>
+          <td>Прикосновения, секс, нежность без «цели»</td>
+          <td>Есть ли контакт вне конфликта?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      <strong>«Рядом, но не вместе»</strong> — частый запрос в кабинете. Часто это не «любовь прошла», а накопленная усталость, невысказанные обиды или страх уязвимости. Имеет смысл начать с малого: 15 минут в день без телефонов — только вы двое, без решения проблем.
+    </div>
+
+    <h2 id="s6">6 · На что смотреть в отношениях</h2>
+
+    <div class="flags">
+      <div class="flag-box red">
+        <h4>Красные флаги</h4>
+        <ul>
+          <li>Унижение, насмешки, «ты довела(ёл)»</li>
+          <li>Контроль: телефон, одежда, друзья, деньги</li>
+          <li>Угрозы уйти / причинить вред</li>
+          <li>Изоляция от близких</li>
+          <li>Физическое насилие — любое</li>
+          <li>«Ты слишком чувствительн(а)» на любую обиду</li>
+        </ul>
+      </div>
+      <div class="flag-box green">
+        <h4>Зелёные флаги</h4>
+        <ul>
+          <li>Извиняется и меняет поведение, а не только слова</li>
+          <li>Ваш «нет» принимается без наказания</li>
+          <li>Можно быть уязвимым без страха</li>
+          <li>Конфликт не превращается в «ты мне должен(на)»</li>
+          <li>Есть интерес к вашему внутреннему миру</li>
+          <li>Вы растёте — и вам не мешают</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="s7">7 · Практикум: 7 дней с собой и отношениями</h2>
+    <p>Не обязательно делать вместе с партнёром — но некоторые дни можно предложить как совместную практику.</p>
+
+    <div class="week-plan">
+      <div class="exercise">
+        <div class="day">День 1 · Карта моей близости</div>
+        <p><strong>Задание:</strong> Опишите три последних отношения (или один текущий) одним предложением каждое: «Это были отношения, где я…»</p>
+        <p><strong>Вопрос:</strong> Что повторяется? Кого вы выбираете и как себя ведёте?</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 2 · Мой тип привязанности</div>
+        <p><strong>Задание:</strong> Прочитайте раздел 1 ещё раз. Отметьте 3 признака, которые про вас. Один — который хотите смягчить.</p>
+        <p><strong>Упражнение:</strong> «Когда я тревожусь / закрываюсь, моё тело делает…, а я говорю…»</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 3 · Одна невысказанная потребность</div>
+        <p><strong>Задание:</strong> Что вы давно хотите от партнёра (или от отношений), но боитесь сказать?</p>
+        <p><strong>Упражнение:</strong> Напишите 3 варианта я-сообщения. Выберите самый мягкий — и решите, готовы ли озвучить на этой неделе.</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 4 · Граница, которую откладываю</div>
+        <p><strong>Задание:</strong> Где вы соглашаетесь через «неудобно»? Где взрываетесь вместо того, чтобы сказать заранее?</p>
+        <p><strong>Упражнение:</strong> Одна граница + страх за ней + одна фраза для озвучивания.</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 5 · Разбор последнего конфликта</div>
+        <p><strong>Задание:</strong> Вспомните ссору. Без обвинений: что <em>вы</em> чувствовали? Какой всадник включился — критика, презрение, защита, стена?</p>
+        <p><strong>Упражнение:</strong> Как можно было сказать иначе — одна фраза.</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 6 · Час близости без задач</div>
+        <p><strong>Задание:</strong> 60 минут вместе (или с собой, если вы одиноки): без телефонов, без «разбора полётов». Прогулка, чай, разговор о чём-то, что вас радует.</p>
+        <p><strong>Дневник:</strong> Что изменилось в ощущении до и после?</p>
+        <div class="field"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="day">День 7 · Итог и один шаг</div>
+        <p><strong>Задание:</strong> Три инсайта недели. Один паттерн, который увидели. Одно действие на следующий месяц — конкретное и выполнимое.</p>
+        <p><strong>Письмо себе:</strong> «Через месяц я хочу в отношениях с собой (и с партнёром) чувствовать…»</p>
+        <div class="field"></div>
+      </div>
+    </div>
+
+    <h3>Чек-лист: «Как у нас сейчас?»</h3>
+    <p>Отметьте то, что откликается. Не для оценки — для ясности.</p>
+    <ul class="checklist">
+      <li>Мы можем говорить о сложном без немедленного скандала</li>
+      <li>Я чувствую, что мои чувства учитываются</li>
+      <li>После ссоры мы возвращаемся к разговору</li>
+      <li>У меня есть время и пространство для себя</li>
+      <li>Я могу сказать «нет» без страха наказания</li>
+      <li>Мы смеёмся и интересуемся друг другом</li>
+      <li>Есть физический контакт, который мне приятен</li>
+      <li>Я не боюсь быть собой рядом с этим человеком</li>
+    </ul>
+    <p style="font-size:13px; color:var(--muted);">Много «нет» — не приговор отношениям, но сигнал, что тема заслуживает внимания: разговор, терапия, или честный взгляд на совместимость.</p>
+
+    <h2 id="s8">8 · Когда нужен психолог</h2>
+    <p>Методичка — для самопомощи и структуры. Она не заменяет терапию, если:</p>
+    <ul>
+      <li>есть насилие — физическое, сексуальное, экономическое, эмоциональное;</li>
+      <li>вы думаете о самоповреждении или не видите выхода;</li>
+      <li>один из партнёров зависим (алкоголь, игры, измены как система);</li>
+      <li>травма или ПТСР влияют на близость — и самостоятельно не отпускает;</li>
+      <li>вы «ходите по кругу» годами, а боль только растёт.</li>
+    </ul>
+
+    <div class="note warn">
+      <strong>Дисклеймер</strong>
+      Материал носит образовательный характер и не является медицинской или психотерапевтической консультацией. При острых состояниях обращайтесь к квалифицированному специалисту или на линию доверия в вашем регионе.
+    </div>
+
+    <p style="margin-top:32px; font-size:14px; color:var(--muted);">
+      Для печати в PDF: откройте этот файл в браузере → Печать → «Сохранить как PDF». Рекомендуем поля «по умолчанию», фон включён.
+    </p>
+
+    <footer>INNERA · Психология отношений · 2026</footer>
+  </div>
+</body>
+</html>

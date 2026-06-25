@@ -24,6 +24,7 @@ export function LandingPage() {
         navItems={[
           { href: "#recognition", label: "Состояния" },
           { href: "#formats", label: "Форматы" },
+          { href: "/products", label: "Продукты" },
           { href: "/start", label: "Старт" },
         ]}
         secondaryCta={{ href: "/start", label: "Войти" }}

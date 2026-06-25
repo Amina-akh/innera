@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import { AmbientBackground } from "@/components/visual/ambient-background";
+import { CurrencyProvider } from "@/context/currency-context";
 import "./globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -20,8 +21,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ru" className={ibmPlexSans.variable}>
       <body>
-        <AmbientBackground />
-        {children}
+        <CurrencyProvider>
+          <AmbientBackground />
+          {children}
+        </CurrencyProvider>
       </body>
     </html>
   );

@@ -3,14 +3,28 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SiteHeader } from "@/components/layout/site-header";
+import { CurrencySelect } from "@/components/ui/currency-select";
+import { useCurrency } from "@/context/currency-context";
+import { formatTherapyPrice } from "@/lib/currency-display";
+import { freeProducts } from "@/lib/products";
+
+const therapyPlans = [
+  { name: "Clarity", note: "ясность входа", krw: 90_000 },
+  { name: "Deep Insight", note: "структура паттерна", krw: 200_000 },
+  { name: "Emotional Reset", note: "перекалибровка", krw: 350_000, featured: true },
+  { name: "Personal Transformation", note: "долгая дуга", krw: 560_000 },
+];
 
 export function PremiumHome() {
+  const { currency } = useCurrency();
+
   return (
     <div className="relative isolate overflow-x-clip">
       <SiteHeader
         navItems={[
           { href: "#approach", label: "Подход" },
           { href: "#formats", label: "Форматы" },
+          { href: "/products", label: "Продукты" },
           { href: "/dashboard", label: "Карта" },
         ]}
       />
@@ -108,18 +122,16 @@ export function PremiumHome() {
                   Траектории в одной <span className="innera-gradient-text">световой среде.</span>
                 </h2>
               </div>
-              <Link href="/full" className="innera-btn innera-btn-secondary px-7 py-3.5">
-                Посмотреть полную структуру
-              </Link>
+              <div className="flex flex-wrap items-center gap-3">
+                <CurrencySelect compact />
+                <Link href="/full" className="innera-btn innera-btn-secondary px-7 py-3.5">
+                  Полная структура
+                </Link>
+              </div>
             </div>
 
             <div className="mt-10 grid gap-4 lg:grid-cols-4">
-              {[
-                { name: "Clarity", note: "ясность входа", price: "90 000 KRW" },
-                { name: "Deep Insight", note: "структура паттерна", price: "200 000 KRW" },
-                { name: "Emotional Reset", note: "перекалибровка", price: "350 000 KRW", featured: true },
-                { name: "Personal Transformation", note: "долгая дуга", price: "560 000 KRW" },
-              ].map((p) => (
+              {therapyPlans.map((p) => (
                 <motion.div
                   key={p.name}
                   whileHover={{ y: -3 }}
@@ -138,13 +150,58 @@ export function PremiumHome() {
                       {p.note}
                     </p>
                     <h3 className="innera-display mt-3 text-[1.6rem] font-semibold leading-[1.05]">{p.name}</h3>
-                    <p className="mt-3 text-[1.05rem] leading-relaxed text-[var(--muted)]">{p.price}</p>
+                    <p className="mt-3 text-[1.05rem] leading-relaxed text-[var(--muted)]">
+                      {formatTherapyPrice(p.krw, currency)}
+                    </p>
                     <div className="mt-6 h-px w-full bg-[rgba(255,255,255,0.08)]" />
                     <Link href="/book" className="innera-btn innera-btn-secondary mt-6 w-full justify-center px-5 py-3 text-sm">
                       Выбрать траекторию
                     </Link>
                   </div>
                 </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[rgba(255,255,255,0.07)] py-16 md:py-22">
+          <div className="innera-container">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-[52ch]">
+                <p className="innera-eyebrow text-[rgba(248,245,248,0.55)]">Бесплатные материалы</p>
+                <h2 className="innera-display mt-4 text-[clamp(1.35rem,2.3vw,2.0rem)] font-semibold leading-[1.12]">
+                  Откройте и посмотрите сразу.
+                </h2>
+              </div>
+              <Link href="/products" className="innera-btn innera-btn-secondary px-7 py-3.5">
+                Все продукты
+              </Link>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {freeProducts.map((product) => (
+                <div key={product.id} className="innera-panel p-6">
+                  <p className="text-[0.78rem] font-semibold tracking-[0.18em] text-[var(--subtle)]">
+                    {product.tierLabel}
+                  </p>
+                  <h3 className="innera-display mt-3 text-[1.35rem] font-semibold leading-[1.1]">{product.title}</h3>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-[var(--muted)]">{product.description}</p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    {product.previewPath ? (
+                      <Link
+                        href={product.previewPath}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="innera-btn innera-btn-primary px-5 py-2.5 text-sm"
+                      >
+                        Открыть
+                      </Link>
+                    ) : null}
+                    <Link href="/products" className="innera-btn innera-btn-ghost px-0 text-sm">
+                      Каталог →
+                    </Link>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
