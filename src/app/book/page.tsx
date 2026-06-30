@@ -27,7 +27,7 @@ export default function BookPage() {
 
   function submitDemo(e: React.FormEvent) {
     e.preventDefault();
-    const username = "marQpsy";
+    const username = "theaminasoul";
     const parts = [
       "Здравствуйте. Хочу записаться на сессию.",
       profile?.name?.trim() ? `Имя: ${profile.name.trim()}` : null,
@@ -135,7 +135,7 @@ export default function BookPage() {
               </form>
             ) : (
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-8 text-[var(--muted)]">
-                Открываем Telegram. Если окно не открылось, напишите вручную: @marQpsy
+                Открываем Telegram. Если окно не открылось, напишите вручную: @theaminasoul
               </motion.p>
             )}
           </Card>

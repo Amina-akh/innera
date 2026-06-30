@@ -113,7 +113,7 @@ export const paidProducts: DigitalProduct[] = [
 
 export const digitalProducts: DigitalProduct[] = [...freeProducts, ...paidProducts];
 
-export const TELEGRAM_USERNAME = "marQpsy";
+export const TELEGRAM_USERNAME = "theaminasoul";
 
 export function buildProductTelegramUrl(product: DigitalProduct, priceLabel: string): string {
   const text = isFreeProduct(product)

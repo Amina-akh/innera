@@ -137,7 +137,7 @@ export function ProductCatalog() {
             <div className="mt-16 border-t border-[var(--glass-border)] pt-14">
               <h2 className="innera-display text-[1.35rem] font-semibold text-[var(--text)]">Платные материалы</h2>
               <p className="mt-2 text-[14px] text-[var(--muted)]">
-                Описание и цена. Полный доступ — после оплаты через @marQpsy.
+                Описание и цена. Полный доступ — после оплаты через @theaminasoul.
               </p>
               <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {paidProducts.map((product, index) => (
